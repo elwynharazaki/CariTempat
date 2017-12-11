@@ -15,7 +15,7 @@ export default (state = INITIAL_STATE, action) => {
       case BOOKMARK_PLACES:
          const newArray = _.uniqBy([
             ...state, action.payload
-         ], 'placeskey');
+         ], 'id');
          const message = newArray.length === state.length
                               ? 'Place already bookmarked'
                               : 'Place has been bookmark';

@@ -1,12 +1,11 @@
 import React, { Component } from 'react';
 import { View } from 'react-native';
 import { MapView } from 'expo';
-import { Card } from 'react-native-elements';
 
 class Locate extends Component {
    static navigationOptions = ({ navigation }) => {
       return {
-         title: navigation.state.params.name
+         title: navigation.state.params.places.name
       };
    }
 
@@ -19,25 +18,25 @@ class Locate extends Component {
       }
    }  
    
-   placesOnMap() {
+   showLocation() {
       return (
-         <MapView
-            style={{ flex: 1 }}
-            initialRegion={this.state.region}
-         >
-         <MapView.Marker
-            coordinate={this.state.region}
-            title={this.props.navigation.state.params.name}
-            description={this.props.navigation.state.params.data.vicinity}
-         />
-         </MapView>
+            <MapView 
+                style={{ flex: 1 }}
+                initialRegion={this.state.region}
+            >
+               <MapView.Marker
+                    coordinate={this.state.region}
+                    title={this.props.navigation.state.params.name}
+                    description={this.props.navigation.state.params.places.vicinity}
+               />
+            </MapView>
       );
    }
 
    render() {
       return (
-         <View>
-            {this.placesOnMap()}
+         <View style={{ flex: 1 }}>
+            {this.showLocation()}
          </View>
       );
    }

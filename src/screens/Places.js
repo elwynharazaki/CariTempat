@@ -46,9 +46,9 @@ class Places extends Component {
 
    showPlaces() {
       // console.log(this.props.places);
-      return this.props.places.map((places, index) => {
+      return this.props.places.results.map((places) => {
          return (
-            <Card key={index} title={places.name}>
+            <Card key={places.id} title={places.name}>
                <View style={{ height: 300 }}>
                   <View style={styles.subHeaderStyle}>
                      <Text style={styles.textStyle}>Open Hours: </Text>
@@ -57,7 +57,7 @@ class Places extends Component {
                   
                   <View style={{ alignItems: 'center', flex: 1, justifyContent: 'center' }}>
                   <Image
-                     source={this.placesImage(places, index)}
+                     source={this.placesImage(places)}
                      style={{ width: '100%', height: 280 }}
                   />
                   </View>
@@ -108,7 +108,7 @@ const styles = {
 
 const mapStateToProps = (state) => {
    return {
-      places: state.places.results
+      places: state.places
    };
 };
 

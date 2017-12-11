@@ -30,18 +30,18 @@ class Bookmarks extends Component {
       };
    }
 
-   onButtonPress = (places, name, coordinate) => {
-      this.props.navigation.navigate('locate', places, name, coordinate);
+   onButtonPress({ places, name, coordinate }) {
+      this.props.navigation.navigate('locate', { places, name, coordinate });
    }
 
-   placesImage(places, index) {
+   placesImage(places) {
       try {
          const params = qs.stringify({
             ...IMAGE_QUERY_PARAMS,
             photoreference: places.photos[0].photo_reference,
          }); 
          const uri = IMAGE + params;
-         console.log(index, uri);
+         console.log(uri);
          return {
               uri
          };
@@ -53,9 +53,9 @@ class Bookmarks extends Component {
    }
 
    showBookmarks() {
-      return this.props.bookmarks.map((places, index) => {
+      return this.props.bookmarks.map((places) => {
          return (
-            <Card key={index} title={places.name}>
+            <Card key={places.id} title={places.name}>
                <View style={{ height: 300 }}>
                   <View style={styles.subHeaderStyle}>
                      <Text style={styles.textStyle}>Open Hours: </Text>
@@ -64,7 +64,7 @@ class Bookmarks extends Component {
                   
                   <View style={{ alignItems: 'center', flex: 1, justifyContent: 'center' }}>
                   <Image
-                     source={this.placesImage(places, index)}
+                     source={this.placesImage(places)}
                      style={{ width: '100%', height: 230 }}
                   />
                   </View>
@@ -114,7 +114,7 @@ const styles = {
       fontWeight: 'bold'
    },
    buttonStyle: {
-      marginTop: 10
+      marginTop: 10,
    }
 };
 
